@@ -10,14 +10,10 @@ void setup() {
 
 void loop() {
 
-
-    readSensor(A0);
-    readSensor(A1);
-    readSensor(A2);
-    readSensor(A3);
-
-
-
+    Array60 readingsA0 = readSensor(A0);
+    for(int i=0; i< 60;i++){
+        Serial.println(readingsA0.arr[i]);
+    }
 
     delay(1000);
 }
