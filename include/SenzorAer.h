@@ -18,11 +18,15 @@ public:
  */
 
 struct Array60{
-    float arr[60];
+    float arr[61];
 };
+
+// Read sensor function that will read from the analog pins which takes the pin as an argument
 
 Array60 readSensor(int pinNr);
 
+// Blink led function using the on board led as an indicator that it works
 
+void finishLED(int nrBlinks);
 
 #endif //ARDUINO_SENZORAER_H

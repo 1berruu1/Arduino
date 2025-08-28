@@ -1,4 +1,4 @@
-#include <SenzorAer.h>
+#include "SenzorAer.h"
 #include <Arduino.h>
 
 /*
@@ -7,14 +7,14 @@
     * If a sensor value is greater than 0, it reads the values from all four.
  */
 
-
 //TODO validari si error handling
 
+// Trebuie un senzor pentru a vedea ce valori trebuie bagate pentru error handling
+// functia analogRead returneaza un int asa ca in functie de ce valori returneaza senzorul se face error handling
 
 Array60 readSensor(int pinNr) {
     unsigned long startTime = millis();
     Array60 allReadings;
-//    float allReadings[61] = {};
     float totalReadings = 0;
     byte arrayIndex = 0;
     while (millis() - startTime < 60000) {
@@ -27,9 +27,26 @@ Array60 readSensor(int pinNr) {
         }
         else{
             Serial.print((int) "Erroare senzor: ", pinNr);
+            delay(1000);
             break;
         }
     }
-    allReadings.arr[60] = totalReadings/60;
+    float averageValue = totalReadings/60;
+    allReadings.arr[arrayIndex] = averageValue;
+    Serial.println("Average: ");
+    Serial.println(allReadings.arr[60]);
+    Serial.println("=======");
     return allReadings;
     }
+
+
+void finishLED(int nr){
+    for(int i=0; i < nr; i++) {
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(1000);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(1000);
+    }
+}
