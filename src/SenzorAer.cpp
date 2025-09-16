@@ -33,9 +33,8 @@ Array60 readSensor(int pinNr) {
     }
     float averageValue = totalReadings/60;
     allReadings.arr[arrayIndex] = averageValue;
-    Serial.println("Average: ");
-    Serial.println(allReadings.arr[60]);
-    Serial.println("=======");
+    Serial.print(allReadings.arr[60]);
+    Serial.print(",");
     return allReadings;
     }
 
